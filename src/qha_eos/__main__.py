@@ -22,12 +22,13 @@ class StaticHelmholtzFreeEnergyCalculator(SingleConfigurationHelmholtzFreeEnergy
     @LazyProperty
     @units.wraps(units.kelvin, None)
     def temperature_array(self):
-        return [0.0, 0.0]
+        return [0.0]
 
     def read_input(self):
         pass
 
 from qha.settings import DEFAULT_SETTING
+from .thermo import static_thermodynamic_potentials
 import copy
 
 class StaticTemperatureVolumeCalculator(TemperatureVolumeFieldCalculator):
@@ -38,6 +39,14 @@ class StaticTemperatureVolumeCalculator(TemperatureVolumeFieldCalculator):
         settings['P_MIN'] = numpy.min(pve_data[:]['pressure'])
         settings['NTV'] = numpy.ptp(pve_data[:]['pressure']) / settings['DELTA_P']
         super().__init__(settings)
+    def calculate_thermodynamic_potentials(self):
+        self._thermodynamic_potentials = \
+            static_thermodynamic_potentials(
+                self.volume_array.magnitude,
+                self.helmholtz_free_energies.magnitude,
+                self.pressures.magnitude
+            )
+
     def make_helmholtz_free_energy_calculator(self):
         self._helmholtz_free_energy_calculator = StaticHelmholtzFreeEnergyCalculator(self.settings, self._pve_data)
 
@@ -107,5 +116,4 @@ def main():
     fp_writer.write('U')
 
     fp_writer.write('Bt')
-    fp_writer.write('Bs')
     fp_writer.write('Btp')
