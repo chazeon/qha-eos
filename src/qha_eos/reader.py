@@ -4,12 +4,10 @@ import numpy
 class InputReader:
     _INPUT_DTYPE = {
         'names': ('pressure', 'volume', 'energy'),
-        'formats': ('f4', 'f4', 'f4')
+        'formats': ('float64', 'float64', 'float64')
     }
     def read(self, fname: str) -> numpy.ndarray:
         raise NotImplementedError()
-
-
 
 class TabularInputReader(InputReader):
     def read(self, fname: str) -> numpy.ndarray:
