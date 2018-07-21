@@ -14,6 +14,9 @@ setup(
     entry_points={
         'qha.applications': [
             'eos = qha_eos.app:QHAEOSProgram'
+        ],
+        'console_scripts': [
+            'qha-eos = qha_eos.__main__:main'
         ]
     }
 )
