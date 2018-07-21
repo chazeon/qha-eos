@@ -1,17 +1,18 @@
 import json
 import numpy
 
+PVE_DTYPE = {
+    'names': ('pressure', 'volume', 'energy'),
+    'formats': ('float64', 'float64', 'float64')
+}
+
 class InputReader:
-    _INPUT_DTYPE = {
-        'names': ('pressure', 'volume', 'energy'),
-        'formats': ('float64', 'float64', 'float64')
-    }
     def read(self, fname: str) -> numpy.ndarray:
         raise NotImplementedError()
 
 class TabularInputReader(InputReader):
     def read(self, fname: str) -> numpy.ndarray:
-        data = numpy.loadtxt(fname, dtype=super()._INPUT_DTYPE)
+        data = numpy.loadtxt(fname, dtype=PVE_DTYPE)
         return data
 
 class JSONInputReader(InputReader):
@@ -25,4 +26,4 @@ class JSONInputReader(InputReader):
             self._getter(data)['pressure'],
             self._getter(data)['volume'],
             self._getter(data)['energy']
-        )), dtype=super()._INPUT_DTYPE)
+        )), dtype=PVE_DTYPE)

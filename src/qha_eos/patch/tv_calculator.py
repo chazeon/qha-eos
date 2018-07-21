@@ -15,6 +15,7 @@ class StaticTemperatureVolumeCalculator(TemperatureVolumeFieldCalculator):
         settings['P_MIN'] = numpy.min(pve_data[:]['pressure'])
         settings['NTV'] = numpy.ptp(pve_data[:]['pressure']) / settings['DELTA_P']
         super().__init__(settings)
+
     def calculate_thermodynamic_potentials(self):
         self._thermodynamic_potentials = \
             static_thermodynamic_potentials(
