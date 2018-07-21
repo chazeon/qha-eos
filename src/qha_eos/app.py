@@ -6,7 +6,6 @@ from .writer import FunctionOfPressureWriter, FunctionOfVolumeWriter
 
 class QHAEOSProgram(QHAProgram):
     
-    command = 'eos'
     aliases = ['equation-of-state']
 
     def __init__(self):
