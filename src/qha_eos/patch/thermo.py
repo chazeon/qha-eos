@@ -1,5 +1,6 @@
 from qha.type_aliases import Matrix, Vector
 
+
 def static_thermodynamic_potentials(v_vector: Vector, free_energies: Matrix, p_tv: Matrix):
     """
     Calculate :math:`H`, :math:`U`, and :math:`G` on :math:`(T,V)` grid from :math:`F`;
