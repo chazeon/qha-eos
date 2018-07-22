@@ -12,8 +12,8 @@ setup(
         'qha'
     ],
     entry_points={
-        'qha.applications': [
-            'eos = qha_eos.app:QHAEOSProgram'
+        'qha.plugins': [
+            'eos = qha_eos.app:QHAEOSCommandHandler'
         ],
         'console_scripts': [
             'qha-eos = qha_eos.__main__:main'

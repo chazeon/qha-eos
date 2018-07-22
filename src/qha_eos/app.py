@@ -1,10 +1,10 @@
-from qha.cli.program import QHAProgram
+from qha.cli.handler import QHACommandHandler
 
 from .patch import StaticHelmholtzFreeEnergyCalculator, StaticTemperatureVolumeCalculator
 from .writer import FunctionOfPressureWriter, FunctionOfVolumeWriter
 
 
-class QHAEOSProgram(QHAProgram):
+class QHAEOSCommandHandler(QHACommandHandler):
     
     aliases = ['equation-of-state']
 
